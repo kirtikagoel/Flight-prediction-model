@@ -1,0 +1,9 @@
+Airline,Date_of_Journey,Source,Destination,Dep_Time,Arrival_Time,Duration,Total_Stops,Price
+IndiGo,24/03/2025,Delhi,Cochin,22:20,01:10,2h 50m,non-stop,3897
+Air India,01/05/2025,Kolkata,Delhi,05:50,08:30,2h 40m,non-stop,7662
+Jet Airways,12/06/2025,Delhi,Cochin,09:25,12:25,3h 00m,1 stop,13882
+SpiceJet,18/03/2025,Mumbai,Hyderabad,18:05,19:30,1h 25m,non-stop,6218
+IndiGo,21/04/2025,Delhi,Cochin,16:50,19:15,2h 25m,1 stop,13302
+Air Asia,10/05/2025,Kolkata,Banglore,23:55,02:45,2h 50m,1 stop,3873
+Vistara,15/06/2025,Delhi,Hyderabad,06:30,08:55,2h 25m,non-stop,4800
+GoAir,11/04/2025,Mumbai,Delhi,20:05,22:30,2h 25m,1 stop,10262

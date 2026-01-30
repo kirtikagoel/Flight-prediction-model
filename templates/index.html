@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flight Price Predictor</title>
+</head>
+<body>
+    <h2>Flight Price Prediction</h2>
+    <form action="/predict" method="post">
+        Airline: <input type="number" name="airline"><br><br>
+        Source: <input type="number" name="source"><br><br>
+        Destination: <input type="number" name="destination"><br><br>
+        Total Stops: <input type="number" name="stops"><br><br>
+        Duration (mins): <input type="number" name="duration"><br><br>
+        <input type="submit" value="Predict Price">
+    </form>
+
+    <h3>{{ prediction_text }}</h3>
+</body>
+</html>
