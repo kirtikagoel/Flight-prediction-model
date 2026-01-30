@@ -2,18 +2,121 @@
 <html>
 <head>
     <title>Flight Price Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #4e73df, #1cc88a);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .card {
+            background: white;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            width: 400px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+            text-align: left;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 10px;
+            background: #4e73df;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #2e59d9;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #1cc88a;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-    <h2>Flight Price Prediction</h2>
+
+<div class="card">
+    <h2>✈ Flight Price Predictor</h2>
+
     <form action="/predict" method="post">
-        Airline: <input type="number" name="airline"><br><br>
-        Source: <input type="number" name="source"><br><br>
-        Destination: <input type="number" name="destination"><br><br>
-        Total Stops: <input type="number" name="stops"><br><br>
-        Duration (mins): <input type="number" name="duration"><br><br>
-        <input type="submit" value="Predict Price">
+
+        <label>Airline</label>
+        <select name="airline">
+            <option value="1">IndiGo</option>
+            <option value="2">Air India</option>
+            <option value="3">SpiceJet</option>
+        </select>
+
+        <label>Source</label>
+        <select name="source">
+            <option value="1">Delhi</option>
+            <option value="2">Mumbai</option>
+            <option value="3">Kolkata</option>
+            <option value="4">Chennai</option>
+            <option value="5">Bangalore</option>
+        </select>
+
+        <label>Destination</label>
+        <select name="destination">
+            <option value="1">Delhi</option>
+            <option value="2">Mumbai</option>
+            <option value="3">Kolkata</option>
+            <option value="4">Chennai</option>
+            <option value="5">Bangalore</option>
+        </select>
+
+        <label>Stops</label>
+        <select name="stops">
+            <option value="0">Non-stop</option>
+            <option value="1">1 Stop</option>
+            <option value="2">2 Stops</option>
+        </select>
+
+        <label>Duration (minutes)</label>
+        <input type="number" name="duration" placeholder="e.g. 120" required>
+
+        <button type="submit">Predict Price 💰</button>
     </form>
 
-    <h3>{{ prediction_text }}</h3>
+    {% if prediction_text %}
+        <div class="result">
+            {{ prediction_text }}
+        </div>
+    {% endif %}
+</div>
+
 </body>
 </html>
