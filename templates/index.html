@@ -9,29 +9,27 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
         }
 
-        .card {
+        .container {
             background: white;
-            padding: 30px 40px;
+            width: 450px;
+            padding: 30px;
             border-radius: 12px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-            width: 400px;
-            text-align: center;
         }
 
         h2 {
+            text-align: center;
             margin-bottom: 20px;
-            color: #333;
         }
 
         label {
             font-weight: bold;
-            display: block;
             margin-top: 10px;
-            text-align: left;
+            display: block;
         }
 
         select, input {
@@ -42,36 +40,64 @@
             border: 1px solid #ccc;
         }
 
+        .row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .row div {
+            flex: 1;
+        }
+
         button {
             margin-top: 20px;
             width: 100%;
             padding: 10px;
-            background: #4e73df;
-            color: white;
-            border: none;
             border-radius: 6px;
+            border: none;
             font-size: 16px;
             cursor: pointer;
         }
 
-        button:hover {
+        .predict-btn {
+            background: #4e73df;
+            color: white;
+        }
+
+        .predict-btn:hover {
             background: #2e59d9;
         }
 
-        .result {
+        .reset-btn {
+            background: #858796;
+            color: white;
+            margin-top: 10px;
+        }
+
+        .result-card {
             margin-top: 20px;
+            padding: 15px;
+            background: #e6f9f0;
+            border-left: 5px solid #1cc88a;
+            border-radius: 6px;
             font-size: 18px;
-            color: #1cc88a;
             font-weight: bold;
+            text-align: center;
         }
     </style>
 </head>
 <body>
 
-<div class="card">
-    <h2>✈ Flight Price Predictor</h2>
+<div class="container">
+    <h2>✈ Smart Flight Price Predictor</h2>
 
     <form action="/predict" method="post">
+
+        <label>Trip Type</label>
+        <select name="trip_type">
+            <option value="1">One Way</option>
+            <option value="2">Round Trip</option>
+        </select>
 
         <label>Airline</label>
         <select name="airline">
@@ -105,14 +131,25 @@
             <option value="2">2 Stops</option>
         </select>
 
-        <label>Duration (minutes)</label>
-        <input type="number" name="duration" placeholder="e.g. 120" required>
+        <label>Journey Date</label>
+        <input type="date" name="journey_date" required>
 
-        <button type="submit">Predict Price 💰</button>
+        <label>Duration</label>
+        <div class="row">
+            <div>
+                <input type="number" name="hours" placeholder="Hours" required>
+            </div>
+            <div>
+                <input type="number" name="minutes" placeholder="Minutes" required>
+            </div>
+        </div>
+
+        <button type="submit" class="predict-btn">Predict Price 💰</button>
+        <button type="reset" class="reset-btn">Reset</button>
     </form>
 
     {% if prediction_text %}
-        <div class="result">
+        <div class="result-card">
             {{ prediction_text }}
         </div>
     {% endif %}

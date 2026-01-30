@@ -1,23 +1,51 @@
-from flask import Flask, render_template, request
+from flask import Flask, request, render_template
 import pickle
 import numpy as np
 
+# Create Flask app
 app = Flask(__name__)
 
+# Load trained model
 model = pickle.load(open("model/flight_model.pkl", "rb"))
 
+
+
+# Home Page
 @app.route("/")
 def home():
     return render_template("index.html")
 
+
+# Prediction Route
 @app.route("/predict", methods=["POST"])
 def predict():
-    features = [int(x) for x in request.form.values()]
-    final_features = [np.array(features)]
-    prediction = model.predict(final_features)
-    output = round(prediction[0], 2)
+    try:
+        # Get values from form
+        airline = int(request.form["airline"])
+        source = int(request.form["source"])
+        destination = int(request.form["destination"])
+        stops = int(request.form["stops"])
+        hours = int(request.form["hours"])
+        minutes = int(request.form["minutes"])
 
-    return render_template("index.html", prediction_text=f"Estimated Flight Price: ₹ {output}")
+        # Convert duration to total minutes
+        duration = hours * 60 + minutes
 
+        # Arrange features in same order used while training
+        final_features = np.array([[airline, source, destination, stops, duration]])
+
+        # Predict price
+        prediction = model.predict(final_features)[0]
+        output = round(prediction, 2)
+
+        return render_template("index.html",
+                               prediction_text=f"Estimated Flight Price: ₹ {output}")
+
+    except Exception as e:
+        return render_template("index.html",
+                               prediction_text=f"Error: {str(e)}")
+
+
+# Run the app
 if __name__ == "__main__":
     app.run(debug=True)
